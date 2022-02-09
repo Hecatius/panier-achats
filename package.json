@@ -1,5 +1,6 @@
 {
-  "homepage": "https://Hecatius.github.io/panier-achats",
+  "remarque-importante": "enlever-ghpages dans la ligne dessous pour publier la page",
+  "homepage-ghpages": "hecatius.github.io/panier-achats/",
   "name": "panier-achats",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +12,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "sass": "^1.49.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

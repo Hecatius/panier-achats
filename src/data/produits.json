@@ -1,0 +1,22 @@
+[
+    {
+        "id": "prd0001",
+        "nom":"t-shirt cool",
+        "prix":13.95
+    },
+    {
+        "id": "prd0002",
+        "nom":"t-shirt pas cool",
+        "prix":5.00
+    },
+    {
+        "id": "prd0003",
+        "nom":"t-shirt Mega Cool",
+        "prix":199.99
+    },
+    {
+        "id": "prd0004",
+        "nom":"t-shirt Deluxe",
+        "prix":"ton âme"
+    }
+]
