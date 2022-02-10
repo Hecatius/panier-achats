@@ -6,7 +6,7 @@ export default function Produit(props) {
           <img src={"images-produits/" + props.pid + ".webp"} alt="T-shirt cool" />
           <div className="titre">{props.nom}</div>
           <div className="prix">{props.prix}</div>
-          <button>Ajouter au panier</button>
+          
         </article>
     );
 }
