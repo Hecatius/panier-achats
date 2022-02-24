@@ -2,16 +2,16 @@ import './App.scss';
 import Entete from './Entete';
 import ListeProduits from './ListeProduits';
 import PiedPage from './PiedPage';
-import{useState} from 'react';
+import{useEffect, useState} from 'react';
 
 function App() {
   //État React pour gérer un panier d'achats
-  const etatPanier = useState({});
+  const etatPanier = useState(() => JSON.parse(window.localStorage.getItem('panier-4pa')) || {});
 //Remarquz que useState retourne un tableau
 //Le premier 
   const panier = etatPanier[0];
-  const setPanier = etatPanier[1]; // ne dois pas changer directement le panier on peut seulement le changer avec la fonction set Panier
-  console.log("L'état panier :",etatPanier);
+// const setPanier = etatPanier[1]; // ne dois pas changer directement le panier on peut seulement le changer avec la fonction set Panier
+// console.log("L'état panier :",etatPanier);
 //   let panier = {
 //     prd0003:{
 //       nom: "T-Shirt à manches courtes",
@@ -33,6 +33,11 @@ function App() {
 //let compteurClic = 0;
 
 const [compteur,setCompteur] = useState(0);
+console.log("Mon panier sous la forme d'une chaine JSON :", JSON.stringify(panier));
+// "Persister" (sauvegarder)
+//Uttiliser le HOOK useEffect pour executer ce code de facon controlé
+useEffect(() => window.localStorage.setItem('panier-4pa',JSON.stringify(panier)), [panier]);
+
   return (
     <div className="App">
       <Entete panier ={panier}/>

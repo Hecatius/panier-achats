@@ -1,6 +1,6 @@
 {
   "remarque-importante": "enlever-ghpages dans la ligne dessous pour publier la page",
-  "homepage-ghd": "https://hecatius.github.io/panier-achats/",
+  "homepage-ghpages": "https://hecatius.github.io/panier-achats/",
   "name": "panier-achats",
   "version": "0.1.0",
   "private": true,
