@@ -3,7 +3,9 @@ import Entete from './Entete';
 import ListeProduits from './ListeProduits';
 import PiedPage from './PiedPage';
 import{useEffect, useState} from 'react';
-
+import Accueil from './Accueil';
+import Histoire from './Histoire';
+import {Routes, Route} from 'react-router-dom';
 function App() {
   //État React pour gérer un panier d'achats
   const etatPanier = useState(() => JSON.parse(window.localStorage.getItem('panier-4pa')) || {});
@@ -41,12 +43,17 @@ useEffect(() => window.localStorage.setItem('panier-4pa',JSON.stringify(panier))
   return (
     <div className="App">
       <Entete panier ={panier}/>
-      <ListeProduits etatPanier ={etatPanier}/>
-      <div>
+      {/* Routes spécifiques à chaque composant */}
+      <Routes>
+        <Route path='/' element={<Accueil/>}/>
+        <Route path='/notre-histoire' element={<Histoire/>}/>
+        <Route path='/nos-produits' element={<ListeProduits etatPanier={etatPanier} />}/>
+      </Routes>
+      <PiedPage />
+      {/* <div>
         <span>Nombres de clics : <i></i>{compteur}</span>
         <button onClick={()=>{setCompteur(compteur + 1); console.log ('compteur:',compteur);}}>Cliquez-moi++</button>
-      </div>
-      <PiedPage />
+      </div> */}
     </div>
   );
 }
