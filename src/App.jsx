@@ -6,7 +6,11 @@ import{useEffect, useState} from 'react';
 import Accueil from './Accueil';
 import Histoire from './Histoire';
 import {Routes, Route} from 'react-router-dom';
+import {authFirebase,authGoogle} from './firebase/init.js'
+import {signInWithPopup, onAuthStateChanged} from "firebase/auth";
+
 function App() {
+  
   //État React pour gérer un panier d'achats
   const etatPanier = useState(() => JSON.parse(window.localStorage.getItem('panier-4pa')) || {});
 //Remarquz que useState retourne un tableau
@@ -40,9 +44,25 @@ console.log("Mon panier sous la forme d'une chaine JSON :", JSON.stringify(panie
 //Uttiliser le HOOK useEffect pour executer ce code de facon controlé
 useEffect(() => window.localStorage.setItem('panier-4pa',JSON.stringify(panier)), [panier]);
 
+const [util,setUtil] = useState(null)
+
+/*Déclenche le processus d'autentification avec Goggle Auth Provider*/
+function connexion(){
+  signInWithPopup(authFirebase,authGoogle).then(
+    objUtilGoogle => setUtil(objUtilGoogle.user)
+  );
+}
+
+// Attacher un "observateur" de changement d'état 
+useEffect(()=>onAuthStateChanged(authFirebase, user => setUtil(user)), []);
+
+
   return (
     <div className="App">
-      <Entete panier ={panier}/>
+      {
+        util ?
+      <>
+      <Entete util={util} setUtil={setUtil} panier ={panier}/>
       {/* Routes spécifiques à chaque composant */}
       <Routes>
         <Route path='/' element={<Accueil/>}/>
@@ -50,10 +70,10 @@ useEffect(() => window.localStorage.setItem('panier-4pa',JSON.stringify(panier))
         <Route path='/nos-produits' element={<ListeProduits etatPanier={etatPanier} />}/>
       </Routes>
       <PiedPage />
-      {/* <div>
-        <span>Nombres de clics : <i></i>{compteur}</span>
-        <button onClick={()=>{setCompteur(compteur + 1); console.log ('compteur:',compteur);}}>Cliquez-moi++</button>
-      </div> */}
+      </>
+      : 
+      <button onClick={connexion}>Connexion</button>
+      }
     </div>
   );
 }

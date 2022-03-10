@@ -2,9 +2,12 @@ import './Entete.scss';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import Badge from '@mui/material/Badge';
 import { NavLink } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import { authFirebase } from './firebase/init';
+import { signOut } from '@firebase/auth';
 
-export default function Entete({panier}) {
-
+export default function Entete({panier,util,setUtil}) {
+    console.log("")
     //Calculer les 5 infos importantes pour obtenir le sommaire du panier (on passe le tableau 
     //(Array) des valeurs dans l'objet 'panier'))
     const {articlesDifferents,articlesTotaux,sousTotal,taxes,total} = calculerInfoPanier(Object.values(panier));
@@ -31,6 +34,11 @@ export default function Entete({panier}) {
                 <div><span>Total</span><span>{total}</span></div>
             </div>
             <a href="#">
+
+            <Avatar alt={util.displayName} src={util.photoURL} />
+            <div>{util.displayName}</div>
+            <button onClick={() => signOut(authFirebase).then(setUtil(null))}>Déconnexion</button>
+
             <Badge badgeContent={totalQte} color="primary">
                 <label htmlFor="cc-sommaire-panier"><ShoppingCartSharpIcon/></label>
             </Badge>
